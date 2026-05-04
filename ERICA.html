@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Growth Adventure</title>
+    <style>
+        body { font-family: 'Comic Sans MS', sans-serif; background-color: #e0f2f1; text-align: center; padding: 20px; }
+        #game-container { background: white; max-width: 600px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 5px solid #4caf50; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        h1 { color: #2e7d32; }
+        .btn { background-color: #4caf50; color: white; border: none; padding: 15px 25px; margin: 10px; border-radius: 10px; cursor: pointer; font-size: 18px; transition: 0.3s; }
+        .btn:hover { background-color: #388e3c; transform: scale(1.05); }
+        #message { font-size: 20px; margin: 20px 0; color: #333; }
+        #plant-image { font-size: 80px; margin: 20px; }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <h1>🌱 The Plant Hero Game</h1>
+    <div id="plant-image">🕳️</div>
+    <div id="message">You are a tiny seed in the dirt. To start growing, what do you need to grow first to find water?</div>
+    <div id="options">
+        <button class="btn" onclick="checkAnswer(1, 'Roots')">Roots</button>
+        <button class="btn" onclick="checkAnswer(1, 'Flowers')">Flowers</button>
+        <button class="btn" onclick="checkAnswer(1, 'Fruit')">Fruit</button>
+    </div>
+</div>
+
+<script>
+    let step = 1;
+
+    function checkAnswer(currentStep, choice) {
+        const msg = document.getElementById('message');
+        const img = document.getElementById('plant-image');
+        const opt = document.getElementById('options');
+
+        if (currentStep === 1) {
+            if (choice === 'Roots') {
+                img.innerHTML = "🌱";
+                msg.innerHTML = "<strong>Correct!</strong> Your roots are drinking water. Now, you need a 'straw' to carry that water up to your leaves. What do you grow?";
+                opt.innerHTML = `
+                    <button class="btn" onclick="checkAnswer(2, 'Stem')">The Stem</button>
+                    <button class="btn" onclick="checkAnswer(2, 'Seeds')">The Seeds</button>
+                `;
+            } else {
+                alert("Oops! Seeds need roots to drink water first. Try again!");
+            }
+        } 
+        else if (currentStep === 2) {
+            if (choice === 'Stem') {
+                img.innerHTML = "🌿";
+                msg.innerHTML = "<strong>Awesome!</strong> The stem holds you up high. Now you are hungry. What parts act like 'solar panels' to make food from sunlight?";
+                opt.innerHTML = `
+                    <button class="btn" onclick="checkAnswer(3, 'Leaves')">The Leaves</button>
+                    <button class="btn" onclick="checkAnswer(3, 'Bark')">The Bark</button>
+                `;
+            } else {
+                alert("Not quite! A stem acts like a straw to help the plant stand tall.");
+            }
+        }
+        else if (currentStep === 3) {
+            if (choice === 'Leaves') {
+                img.innerHTML = "🌻";
+                msg.innerHTML = "<strong>You did it!</strong> Your leaves made enough food to grow a beautiful Flower! You are now a fully grown Sunflower. 🏆";
+                opt.innerHTML = <button class="btn" onclick="location.reload()">Play Again!</button>;
+            } else {
+                alert("Bark is for trees! You need flat green leaves to catch the sun.");
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
